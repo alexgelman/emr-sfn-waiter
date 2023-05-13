@@ -100,11 +100,6 @@
       "type": "build"
     },
     {
-      "name": "ts-jest",
-      "version": "^27",
-      "type": "build"
-    },
-    {
       "name": "typescript",
       "type": "build"
     },

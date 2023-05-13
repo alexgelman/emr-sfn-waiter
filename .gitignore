@@ -45,13 +45,14 @@ junit.xml
 !/.github/workflows/upgrade-main.yml
 !/.github/pull_request_template.md
 !/.npmrc
-!/test/
+!/lib/__tests__/
 !/tsconfig.dev.json
 !/lib/
 /lib/**/*.js
 /lib/**/*.d.ts
 /lib/**/*.d.ts.map
 /dist/
+!/.projen/jest-snapshot-resolver.js
 !/.eslintrc.json
 .jsii
 tsconfig.json

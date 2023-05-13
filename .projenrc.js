@@ -44,7 +44,7 @@ const project = new cdk.JsiiProject({
     'constructs',
   ],
   srcdir: 'lib',
-  testdir: 'test',
+  testdir: 'lib/__tests__',
   autoApproveOptions: {
     allowedUsernames: ['alexgelman'],
     secret: 'GITHUB_TOKEN',
