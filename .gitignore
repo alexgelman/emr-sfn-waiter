@@ -14,6 +14,9 @@ cdk.out
 # TypeScript cache
 *.tsbuildinfo
 
+# Python cache
+.mypy_cache
+
 # dotenv environment variables file
 .env
 .env.test
