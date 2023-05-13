@@ -6,17 +6,17 @@ const project = new cdk.JsiiProject({
   authorName: 'Alex Gelman',
   authorEmail: '6887237+alexgelman@users.noreply.github.com',
   repository: 'https://github.com/alexgelman/emr-sfn-waiter',
+  license: 'MIT',
+  vscode: true,
+  gitignore: [
+    '.DS_Store',
+    '.mypy_cache/',
+  ],
   projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
   releaseToNpm: true,
   publishToNuget: {
     dotNetNamespace: 'Alexg.Cdk.EmrSfnWaiter',
     packageId: 'Alexg.Cdk.EmrSfnWaiter',
-  },
-  publishToMaven: {
-    mavenGroupId: 'software.alexg',
-    mavenEndpoint: 'https://s01.oss.sonatype.org',
-    javaPackage: 'software.alexg.emr-sfn-waiter',
-    mavenArtifactId: 'emr-sfn-waiter',
   },
   publishToPypi: {
     distName: 'emr-sfn-waiter',
@@ -33,18 +33,18 @@ const project = new cdk.JsiiProject({
   ],
   devDeps: [
     'aws-cdk-lib',
-    'aws-cdk@^2.78.0',
+    'aws-cdk@^2.79.1',
     'aws-sdk',
     'esbuild',
     'constructs',
   ],
   keywords: [
     'cdk',
-    'aws-cdk@^2.78.0',
+    'aws-cdk@^2.79.1',
     'constructs',
   ],
   srcdir: 'lib',
-  testdir: 'tests',
+  testdir: 'test',
   autoApproveOptions: {
     allowedUsernames: ['alexgelman'],
     secret: 'GITHUB_TOKEN',
