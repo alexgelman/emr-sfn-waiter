@@ -1,12 +1,34 @@
-# Welcome to your CDK TypeScript Construct Library project
+# AWS EMR Serverless SFN Waiter Workflow
 
-You should explore the contents of this project. It demonstrates a CDK Construct Library that includes a construct (`SparkRetry`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+This CDK library demonstrates how to implement a Step Function workflow that starts an EMR Serverless job and waits until the job completes before continuing the workflow execution.
 
-The construct defines an interface (`SparkRetryProps`) to configure the visibility timeout of the queue.
+## Usage:
 
-## Useful commands
+The library contains a helper function `chainEmrJobWaitPattern` that can be used from any CDK construct.<br>
+Given an `emrServerlessApp` of type `CfnApplication` the helper function can be used in the following manner:
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
+```typescript
+const runJobState = new CallAwsService(this, "RunSparkJob", {
+    service: "emrserverless",
+    action: "startJobRun",
+    resultPath: "$.JobInfo",
+    iamResources: [emrServerlessApp.attrArn],
+    parameters: {
+        ApplicationId: emrServerlessApp.attrApplicationId,
+        "ClientToken.$": "States.UUID()",
+        JobDriver: {
+            SparkSubmit: {
+                EntryPoint: "s3://example-jar/job.jar",
+                SparkSubmitParameters: "MainClass",
+            },
+        },
+        ExecutionRoleArn: jobRole.roleArn,
+    },
+});
+
+const successState = new Succeed(this, "SuccessState");
+const failState = new Fail(this, "FailState");
+
+// Create a workflow that polls for job completion before continuing to either success or fail chains.
+const definition = chainEmrJobWaitPattern(this, emrServerlessApp, runJobState, successState, failState);
+```

@@ -1,8 +1,23 @@
 *.js
 !jest.config.js
 *.d.ts
-node_modules
+node_modules/
+
+tsconfig.json
+.jsii
+dist/
 
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+# TypeScript cache
+*.tsbuildinfo
+
+# dotenv environment variables file
+.env
+.env.test
+
+.idea/
+.vscode/
+.DS_Store
